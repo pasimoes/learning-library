@@ -107,7 +107,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 1. Create a directory to contain the workshop code. The directory name is used to create a compartment of the same name in your tenancy. The directory name must have between 1 and 13 characters, contain only letters or numbers, and start with a letter. Make sure that a compartment of the same name does not already exist in your tenancy or the setup will fail. For example:
 
     ```bash
-    <copy>mkdir lab8022</copy>
+    <copy>mkdir teqodb</copy>
     ```
 
    All the resources created by the setup are created using the directory name, for example the compartment is created with the same name. This will let you to quickly delete and cleanup afterward.  
@@ -115,7 +115,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 2. Change directory to the directory that you have created. The setup will fail if you do not complete this step. For example:
 
     ```bash
-    <copy>cd lab8022</copy>
+    <copy>cd teqodb</copy>
     ```
 
 ## **Task 7:** Make a Clone of the Workshop Setup Script and Source Code

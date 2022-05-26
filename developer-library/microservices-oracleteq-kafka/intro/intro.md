@@ -58,4 +58,4 @@ You may now **proceed to the next lab**
 
 * **Authors** - Paulo Simoes, Developer Evangelist; Paul Parkinson, Developer Evangelist; Richard Exley, Consulting Member of Technical Staff, Oracle MAA and Exadata
 * **Contributors** - Mayank Tayal, Developer Evangelist; Sanjay Goil, VP Microservices and Oracle Database
-* **Last Updated By/Date** - Paulo Simoes, February 2022
+* **Last Updated By/Date** - Paulo Simoes, May 2022
