@@ -20,37 +20,48 @@ Estimated Time: 10 minutes
 
 ## **Task 1:** Run Kafka Broker and Create a Topic
 
-1. Execute the following commands to start the Kafka cluster and connect Broker to Lab8022 Network:
+1. Check the installed Kafka components executing the following command:
 
     ```bash
     <copy>
-    cd $LAB_HOME/cloud-setup/confluent-kafka
+    kafka-status
     </copy>
     ```
 
+    As a result, you will see the following components created:
+
+    ```bash
+    NAME                COMMAND                  SERVICE             STATUS              PORTS
+    broker              "/etc/confluent/dock…"   broker              created
+    connect             "/etc/confluent/dock…"   connect             created
+    schema-registry     "/etc/confluent/dock…"   schema-registry     created
+    zookeeper           "/etc/confluent/dock…"   zookeeper           created
+    ```
+
+2. Start the Kafka infrastructure by running the following command:
+
     ```bash
     <copy>
-    ./docker-compose up -d
+    kafka-start
     </copy>
     ```
 
+    This command should return the following lines:
+
     ```bash
-    <copy>
-    docker network connect lab8022network broker
-    </copy>
+    [+] Running 4/4
+    ⠿ Container zookeeper        Started                                                                                                                    0.6s
+    ⠿ Container broker           Started                                                                                                                    1.7s
+    ⠿ Container schema-registry  Started                                                                                                                    3.1s
+    ⠿ Container connect          Started                                                                                                                    4.4s
+    KAFKA_RUNNING completed
     ```
 
-2. Once successfully executed, check that the services are running executing the follwing commands:
+3. Once successfully executed, check that the services are running executing the follwing commands:
 
     ```bash
     <copy>
-    cd $LAB_HOME/cloud-setup/confluent-kafka
-    </copy>
-    ```
-
-    ```bash
-    <copy>
-    ./docker-compose ps
+    kafka-status
     </copy>
     ```
 
@@ -62,20 +73,54 @@ Estimated Time: 10 minutes
 
     > **Note:** If your cloud shell connection interrupt during the process, may you will have to reconnect and executing the instructions from [Task 5](#task5restartkafkacomponentsoptional).
 
-3. Create a Topic:
+4. Create a Topic:
 
-    You are ready to create the topic *LAB8022_TOPIC*. Run the following command to create a new topic into the Kafka Broker:
+    With the Kafka infrastructure ready, you can create a Kafka Topic which will be used during this workshop. A Kafka Topic is a resource where Events are organized and durable stored. A Topic has a unique name across the entire Kafka cluster and there is not the concept of renaming a Topic thus choose a meaningful name that will categorize well the Events handled by it.
 
     ```bash
     <copy>
-    docker exec broker \
-    kafka-topics --bootstrap-server broker:9092 \
-    --create \
-    --topic LAB8022_TOPIC
+    kafka-add-topic LABTEQTOPIC1
     </copy>
     ```
 
-    After a *WARNING* message that you can disregard, you will see the message **"Created topic LAB8022_TOPIC."**
+    This command will create the Kafka Topic and configure the properties of the Producer and Consumer microservices to point to the newly created topic.
+
+    ```bash
+    Created topic LABTEQTOPIC1
+    Configuring Kafka Producer to produce on topic LABTEQTOPIC1.
+    Configuring Kafka Producer to consume from topic LABTEQTOPIC1.
+    ```
+
+## **Task 2:** Build Kafka producer and consumer microservices
+
+This laboratory adopted the microservices architecture and coded the producer and consumer using Spring Boot framework and Spring Kafka project to connect with Kafka. To build their codes, we adopted Maven tool.
+
+```bash
+<copy>cd $LAB_HOME/springboot-kafka</copy>
+```
+
+```bash
+<copy>./release-kafka-ms</copy>
+```
+
+```bash
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Oracle Developers :: W8022 :: EDApp Kafka Sample 0.0.1-SNAPSHOT:
+[INFO] 
+[INFO] Oracle Developers :: W8022 :: EDApp Kafka Sample ... SUCCESS [  1.680 s]
+[INFO] Oracle Developers :: W8022 :: EDApp Kafka Config ... SUCCESS [  7.713 s]
+[INFO] Oracle Developers :: W8022 :: EDApp Kafka Producer . SUCCESS [  4.654 s]
+[INFO] Oracle Developers :: W8022 :: EDApp Kafka Consumer . SUCCESS [  0.650 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  17.335 s
+[INFO] Finished at: 2022-05-31T22:23:19Z
+[INFO] ------------------------------------------------------------------------
+Executing producer deploy.sh in the background
+Executing consumer deploy.sh in the background
+```
+
 
 ## **Task 2:** Verify configurations and build applications
 

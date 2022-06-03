@@ -52,7 +52,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 1. Create a directory to contain the workshop code. The directory name is used to create a compartment of the same name in your tenancy. The directory name must have between 1 and 13 characters, contain only letters or numbers, and start with a letter. Make sure that a compartment of the same name does not already exist in your tenancy or the setup will fail. For example:
 
     ```bash
-    <copy>mkdir lab8022</copy>
+    <copy>mkdir teqodb</copy>
     ```
 
    All the resources created by the setup are created using the directory name, for example the compartment is created with the same name. This will let you to quickly delete and cleanup afterward.  
@@ -60,7 +60,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 2. Change directory to the directory that you have created. The setup will fail if you do not complete this step. For example:
 
     ```bash
-    <copy>cd lab8022</copy>
+    <copy>cd teqodb</copy>
     ```
 
 ## **Task 4:** Make a Clone of the Workshop Setup Script and Source Code
@@ -77,12 +77,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 
     ```bash
     <copy>
-    echo "# LiveLab Setup -- BEGIN" >>${HOME}/.bashrc
-    echo "export LAB_HOME=${HOME}/lab8022/microservices-datadriven/workshops/oracleteq-kafka" >>${HOME}/.bashrc
-    export JAVA_HOME=${HOME}/graalvm-ce-java11-22.0.0.2
-    echo "export JAVA_HOME=${HOME}/graalvm-ce-java11-22.0.0.2" >>${HOME}/.bashrc
-    echo "export PATH=$JAVA_HOME/bin/:$PATH" >>${HOME}/.bashrc
-    echo "# LiveLab Setup -- END" >>${HOME}/.bashrc
+    source ./microservices-datadriven/workshops/oracleteq-kafka/cloud-setup/env.sh
     source ${HOME}/.bashrc
     </copy>
     ```
@@ -90,12 +85,6 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 ## **Task 5:** Start the Setup
 
 1. Execute the following commands to start the setup.  
-
-    ```bash
-    <copy>
-    source $LAB_HOME/cloud-setup/env.sh
-    </copy>
-    ```
 
     ```bash
     <copy>
@@ -198,4 +187,4 @@ You may now **proceed to the next lab**
 
 - **Authors** - Paulo Simoes, Developer Evangelist; Paul Parkinson, Developer Evangelist; Richard Exley, Consulting Member of Technical Staff, Oracle MAA and Exadata
 - **Contributors** - Mayank Tayal, Developer Evangelist; Sanjay Goil, VP Microservices and Oracle Database
-- **Last Updated By/Date** - Paulo Simoes, February 2022
+- **Last Updated By/Date** - Paulo Simoes, May 2022

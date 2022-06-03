@@ -80,7 +80,7 @@ If you have already used up some quota on your tenancy, perhaps while completing
 | Service          | Scope  | Resource                                             | Available | Free Account Limit |
 |------------------|:------:|------------------------------------------------------|:---------:|:------------------:|
 | Database         | Region | Autonomous Transaction Processing Total Storage (TB) | **1**     | 2                  |
-|                  | Region | Autonomous Transaction Processing OCPU Count         | **2**     | 8                  |
+|                  | Region | Autonomous Transaction Processing OCPU Count         | **1**     | 8                  |
 
 Quota usage and limits can be check through the console: **Governance & Administration** -- **Governance** -- **Limits, Quotas and Usage**, For example:
 
@@ -121,7 +121,6 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 ## **Task 7:** Make a Clone of the Workshop Setup Script and Source Code
 
 1. To work with the application code, you need to make a clone from the GitHub repository using the following command.  
-[//]: #
 
     ```bash
     <copy>git clone -b 22.4.2 --single-branch https://github.com/oracle/microservices-datadriven.git</copy>
@@ -133,12 +132,7 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 
     ```bash
     <copy>
-    echo "# LiveLab Setup -- BEGIN" >>${HOME}/.bashrc
-    echo "export LAB_HOME=${HOME}/lab8022/microservices-datadriven/workshops/oracleteq-kafka" >>${HOME}/.bashrc
-    export JAVA_HOME=${HOME}/graalvm-ce-java11-22.0.0.2
-    echo "export JAVA_HOME=${HOME}/graalvm-ce-java11-22.0.0.2" >>${HOME}/.bashrc
-    echo "export PATH=$JAVA_HOME/bin/:$PATH" >>${HOME}/.bashrc
-    echo "# LiveLab Setup -- END" >>${HOME}/.bashrc
+    source ./microservices-datadriven/workshops/oracleteq-kafka/cloud-setup/env.sh
     source ${HOME}/.bashrc
     </copy>
     ```
@@ -149,20 +143,12 @@ Cloud Shell is a small virtual machine running a "bash" shell which you access t
 
     ```bash
     <copy>
-    source $LAB_HOME/cloud-setup/env.sh
-    </copy>
-    ```
-
-    ```bash
-    <copy>
     source $LAB_HOME/cloud-setup/setup.sh
     </copy>
     ```
 
     > **Note:** Cloud shell may disconnect after a period of inactivity. If that happens, you can reconnect and then run this command to resume the setup:
-
     >   ```bash
-    >
         <copy>source $LAB_HOME/cloud-setup/setup.sh</copy>
         ```
 
@@ -256,4 +242,4 @@ You may now **proceed to the next lab**
 
 - **Authors** - Paulo Simoes, Developer Evangelist; Paul Parkinson, Developer Evangelist; Richard Exley, Consulting Member of Technical Staff, Oracle MAA and Exadata
 - **Contributors** - Mayank Tayal, Developer Evangelist; Sanjay Goil, VP Microservices and Oracle Database
-- **Last Updated By/Date** - Paulo Simoes, February 2022
+- **Last Updated By/Date** - Paulo Simoes, May 2022
