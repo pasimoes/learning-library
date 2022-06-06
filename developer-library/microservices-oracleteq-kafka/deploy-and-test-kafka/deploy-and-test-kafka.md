@@ -93,33 +93,61 @@ Estimated Time: 10 minutes
 
 ## **Task 2:** Build Kafka producer and consumer microservices
 
-This laboratory adopted the microservices architecture and coded the producer and consumer using Spring Boot framework and Spring Kafka project to connect with Kafka. To build their codes, we adopted Maven tool.
+This laboratory adopted the microservices architecture and coded the producer and consumer using the Spring Boot framework and Spring Kafka project to connect with Kafka. Maven is the project management tool, and to build our code, you have to execute the following commands:
 
 ```bash
 <copy>cd $LAB_HOME/springboot-kafka</copy>
 ```
 
 ```bash
-<copy>./release-kafka-ms</copy>
+<copy>./kafka-ms-build</copy>
 ```
 
-```bash
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Summary for Oracle Developers :: W8022 :: EDApp Kafka Sample 0.0.1-SNAPSHOT:
-[INFO] 
-[INFO] Oracle Developers :: W8022 :: EDApp Kafka Sample ... SUCCESS [  1.680 s]
-[INFO] Oracle Developers :: W8022 :: EDApp Kafka Config ... SUCCESS [  7.713 s]
-[INFO] Oracle Developers :: W8022 :: EDApp Kafka Producer . SUCCESS [  4.654 s]
-[INFO] Oracle Developers :: W8022 :: EDApp Kafka Consumer . SUCCESS [  0.650 s]
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  17.335 s
-[INFO] Finished at: 2022-05-31T22:23:19Z
-[INFO] ------------------------------------------------------------------------
-Executing producer deploy.sh in the background
-Executing consumer deploy.sh in the background
-```
+As a result of the Maven build task, you should obtain the following lines showing that both Consumer and Producer were successfully built.
+
+![Spring Boot Apps Build result](images/springboot-kafka-build-result.png " ")
+
+## **Task 3:** Produce events with Kafka producer microservice
+
+1. Deploy Kafka producer microservice
+
+    Now that we have the applications successfully built, we can deploy them and test them. Let's start with the Producer. Run these commands to build the image and deploy the Producer inside the Docker Engine (the same running the Kafka Cluster):
+
+    ```bash
+    <copy>cd $LAB_HOME/springboot-kafka</copy>
+    ```
+
+    ```bash
+    <copy>./kafka-ms-deploy-producer</copy>
+    ```
+
+    If the deployment task is successful, you will receive the messages below:
+
+    ```bash
+    Executing Kafka producer microservice deployment!
+    Kafka producer microservices deployment succeeded!
+     Step 1/8 : FROM ghcr.io/graalvm/graalvm-ce:ol8-java11 -- Successfully built c2e8cd47b003 Successfully tagged oracle-developers-kafka-producer:0.0.1-SNAPSHOT
+    KAFKA_MS_PRODUCER_DEPLOYED completed
+    ```
+
+    > **Note:** If the deployment task did not complete correctly, you can investigate the deployment task logs at "$LAB_LOG"/kafka-ms-producer-deployment.log
+
+2. Launch a Kafka producer microservice
+
+    Once you have deployed the producer microservice image, you will be able to launch a container and execute the producer microservice. Issue the follwoing commands:
+
+    ```bash
+    <copy>cd $LAB_HOME/springboot-kafka</copy>
+    ```
+
+    ```bash
+    <copy>./kafka-ms-launch-producer</copy>
+    ```
+
+    If the deployment task is successful, you will receive the messages below:
+
+
+3. Test the Kafka producer microservice
 
 
 ## **Task 2:** Verify configurations and build applications
@@ -156,22 +184,6 @@ This workshop makes the source codes of the two microservices available; We invi
     And, likewise in the Producer case, the Consumer should point to the above bootstrap servers and topic.
 
     > **Note:** If you change these configurations, you will have to modify these parameters.
-
-3. Build the Applications
-
-    Once you have confirmed that all configuration is correct, you have to build the microservices. To facilitate it, the workshop We use Maven to build the applications Producer and Consumer and the configuration module. Run the following commands to build both projects:
-
-    ```bash
-    <copy>cd $LAB_HOME/springboot-kafka</copy>
-    ```
-
-    ```bash
-    <copy>mvn clean install -DskipTests</copy>
-    ```
-
-    As a result, all modules were built with success.
-
-    ![Spring Boot Apps Build result](images/springboot-kafka-build-result.png " ")
 
 ## **Task 3:** Deploy and Test Spring Boot Kafka Producer
 
