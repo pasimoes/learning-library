@@ -144,80 +144,15 @@ As a result of the Maven build task, you should obtain the following lines showi
     <copy>./kafka-ms-launch-producer</copy>
     ```
 
-    If the deployment task is successful, you will receive the messages below:
-
-
-3. Test the Kafka producer microservice
-
-
-## **Task 2:** Verify configurations and build applications
-
-The Kafka Producer and Consumer adopt Spring Boot and Spring Kafka frameworks. The Producer exposes a REST service that will produce a message and publish it in the Kafka Broker created. And on the other side, the Consumer will subscribe to the same topic and consume messages—a straightforward and typical case but instructive and essential when compared with the next lab.
-
-This workshop makes the source codes of the two microservices available; We invite you to investigate the code to familiarize yourself with Spring Boot and how it connects with Apache Kafka, which allows for asynchronous communication between microservices. After this navigation, you must confirm the microservices settings present in a properties file, following microservices [External Configuration Pattern](https://microservices.io/patterns/externalized-configuration.html) and also the third factor of [Twelve Factor Methodology](https://12factor.net).
-
-1. Review Producer microservices properties
-
-    You have to review the Producer microservice properties to confirm connecting with the right Apache Kafka Broker and Topic. Remember that both were configured during workshop setup tasks, and Kafka Broker runs at address Broker:9092. But, as we are working on the Docker engine from the Cloud Shell environment, Kafka broker is advertised for other nodes on port 29092.
-
-    To verify the producer configuration, you can execute the follow command:
+    If the deployment task is successful, you will receive the messages "Kafka producer microservice is running!". Yet it is possible to evaluate the logs from the producer issuing the following command to list the late six lines from the container log:
 
     ```bash
-    <copy>cat $LAB_HOME/springboot-kafka/kafka-producer/src/main/resources/application.yaml</copy>
-    ```
-
-    The proper configuration should be:
-
-    - bootstrap-servers: broker:29092
-    - topic-name: LAB8022_TOPIC
-
-    ![Spring Boot Producer App Configuration](images/springboot-kafka-config.png " ")
-
-2. Review the Consumer Configurations
-
-    Following the same concepts and practices of Producer, Consumer microservice has its configuration externalized and should point to the right Apache Kafka broker that Producer is connected. The following command allows you to list the contents of Consumer properties.
-
-    ```bash
-    <copy>cat $LAB_HOME/springboot-kafka/kafka-consumer/src/main/resources/application.yaml</copy>
-    ```
-
-    And, likewise in the Producer case, the Consumer should point to the above bootstrap servers and topic.
-
-    > **Note:** If you change these configurations, you will have to modify these parameters.
-
-## **Task 3:** Deploy and Test Spring Boot Kafka Producer
-
-1. Deploy Kafka Producer Microservice
-
-    Now that we have the applications successfully built, we can deploy them and test them. Let's start with the Producer. Run these commands to build the image and deploy the Producer inside the Docker Engine (the same running the Kafka Cluster):
-
-    ```bash
-    <copy>cd $LAB_HOME/springboot-kafka/kafka-producer</copy>
-    ```
-
-    ```bash
-    <copy>./build.sh</copy>
-    ```
-
-    Now, let's run the Producer:
-
-    ```bash
-    <copy>
-    docker run --detach --name=kafka-producer --network lab8022network -p 8080:8080 oracle-developers-kafka-producer:0.0.1-SNAPSHOT
-    </copy>
-    ```
-
-    We can check the logs and see the Producer running and waiting for requests:
-
-    ```bash
-    <copy>
-    docker logs kafka-producer
-    </copy>
+    <copy>ms-logs kafka-producer 6</copy>
     ```
 
     ![Spring Boot Kafka Producer Running Logs](images/springboot-kafka-producer-running.png " ")
 
-2. Test Kafka Producer Microservice
+3. Test the Kafka producer microservice
 
     We will use the cURL command to test our Producer.
 
@@ -254,6 +189,48 @@ This workshop makes the source codes of the two microservices available; We invi
     ![Kafka Consumer inside Docker](images/kafka-consumer-docker.png " ")
 
     You will need to press Crtl+C to stop this process.
+
+## **Task 2:** Verify configurations and build applications
+
+The Kafka Producer and Consumer adopt Spring Boot and Spring Kafka frameworks. The Producer exposes a REST service that will produce a message and publish it in the Kafka Broker created. And on the other side, the Consumer will subscribe to the same topic and consume messages—a straightforward and typical case but instructive and essential when compared with the next lab.
+
+This workshop makes the source codes of the two microservices available; We invite you to investigate the code to familiarize yourself with Spring Boot and how it connects with Apache Kafka, which allows for asynchronous communication between microservices. After this navigation, you must confirm the microservices settings present in a properties file, following microservices [External Configuration Pattern](https://microservices.io/patterns/externalized-configuration.html) and also the third factor of [Twelve Factor Methodology](https://12factor.net).
+
+1. Review Producer microservices properties
+
+    You have to review the Producer microservice properties to confirm connecting with the right Apache Kafka Broker and Topic. Remember that both were configured during workshop setup tasks, and Kafka Broker runs at address Broker:9092. But, as we are working on the Docker engine from the Cloud Shell environment, Kafka broker is advertised for other nodes on port 29092.
+
+    To verify the producer configuration, you can execute the follow command:
+
+    ```bash
+    <copy>cat $LAB_HOME/springboot-kafka/kafka-producer/src/main/resources/application.yaml</copy>
+    ```
+
+    The proper configuration should be:
+
+    - bootstrap-servers: broker:29092
+    - topic-name: LAB8022_TOPIC
+
+    ![Spring Boot Producer App Configuration](images/springboot-kafka-config.png " ")
+
+2. Review the Consumer Configurations
+
+    Following the same concepts and practices of Producer, Consumer microservice has its configuration externalized and should point to the right Apache Kafka broker that Producer is connected. The following command allows you to list the contents of Consumer properties.
+
+    ```bash
+    <copy>cat $LAB_HOME/springboot-kafka/kafka-consumer/src/main/resources/application.yaml</copy>
+    ```
+
+    And, likewise in the Producer case, the Consumer should point to the above bootstrap servers and topic.
+
+    > **Note:** If you change these configurations, you will have to modify these parameters.
+
+
+
+
+2. Test Kafka Producer Microservice
+
+
 
 ## **Task 4:** Deploy and Test Spring Boot Kafka Consumer
 
