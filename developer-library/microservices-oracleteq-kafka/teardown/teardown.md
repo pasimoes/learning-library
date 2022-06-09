@@ -190,4 +190,4 @@ In the Oracle Cloud Infraestructure Console navigate to the Compartments screen 
 
 - **Authors** - Paulo Simoes, Developer Evangelist; Paul Parkinson, Developer Evangelist; Richard Exley, Consulting Member of Technical Staff, Oracle MAA and Exadata
 - **Contributors** - Mayank Tayal, Developer Evangelist; Sanjay Goil, VP Microservices and Oracle Database
-- **Last Updated By/Date** - Paulo Simoes, March 2022
+- **Last Updated By/Date** - Paulo Simoes, June 2022
