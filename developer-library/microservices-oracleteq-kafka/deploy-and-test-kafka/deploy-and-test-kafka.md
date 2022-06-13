@@ -50,10 +50,10 @@ Estimated Time: 10 minutes
 
     ```bash
     [+] Running 4/4
-    ⠿ Container zookeeper        Started                                                                           0.6s
-    ⠿ Container broker           Started                                                                           1.7s
-    ⠿ Container schema-registry  Started                                                                           3.1s
-    ⠿ Container connect          Started                                                                           4.4s
+    ⠿ Container zookeeper        Started                0.6s
+    ⠿ Container broker           Started                1.7s
+    ⠿ Container schema-registry  Started                3.1s
+    ⠿ Container connect          Started                4.4s
     KAFKA_RUNNING completed
     ```
 

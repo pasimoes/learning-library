@@ -8,9 +8,10 @@ Estimated Time: 15 minutes
 
 ### Objectives
 
-- Learn about Oracle Transactional Event Queues and okafka library
-- Deploy and access the Oracle TEQ/okafka Producer Microservice
-- Deploy and access the Oracle TEQ/okafka Consumer Microservice
+- Learn about Oracle Transactional Event Queues (TEQ) and okafka library
+- Create a Oracle TEQ Topic
+- Deploy and access the Oracle TEQ Producer Microservice
+- Deploy and access the Oracle TEQ Consumer Microservice
 - Learn how they work
 
 ### Prerequisites
@@ -19,54 +20,21 @@ Estimated Time: 15 minutes
 - The Oracle Autonomous Transaction Processing database.
 - A Docker Engine accessible.
 
-## Overview of the Oracle Transactional Event Queues (TEQ) Provisioning
+## Overview of the Oracle Transactional Event Queues (TEQ)
 
-The Oracle Transactional Event Queues (TEQ) and its subscriber agent were provisioned while running the configuration (setup phase). Below is a description of the steps taken to make these assets available.
+Oracle Transactional Event Queues (TEQ) is a robust and feature-rich event streaming platform integrated with the Oracle database used to collect, process, store, and integrate data at scale. TEQ that are highly optimized implementation of AQ previously called AQ Sharded Queues, also AQ, address the requirements from data-driven and event-driven architectures in modern enterprise applications, including numerous use cases as distributed streaming, stream processing, data integration, and pub/sub messaging.
 
-1. Create Oracle Transactional Event Queues (TEQ):
+You can adopt Transactional Event Queues with one event stream (to preserve total ordering in the queue) or consider taking advantage of multiple event streams where messages are ordered within each event stream. This is similar to Apache Kafka's Topics approach consisting of multiple partitions from which producers and consumers can publish or subscribe.
 
-    A user was created, and some privileges were granted to create and manage Oracle TEQ.
+Oracle Transactional Event Queues (TEQ) are a high-performance partitioned implementation with multiple event streams per queue that store messages persistently and propagate messages between queues on different databases. Because TEQs are implemented in database tables, all high availability, scalability, and reliability operational benefits are also applicable to queue data. TEQ supports standard database features such as recovery, restart, and security. You can use standard database development and management tools to monitor queues. Like other database tables, queue tables can be imported and exported. Similarly, *TEQ queues are supported by Oracle Data Guard for high availability, which can be critical to preserving messages when using a stateless middle tier*.
 
-    ```sql
-    <copy>
-    create user <username> identified by <password>
-    grant connect, resource to user
-    grant execute on dbms_aqadm to user
-    grant execute on dbms_aqin to user
-    grant execute on dbms_aqjms to user
-    grant aq_user_role to user
-    grant select_catalog_role to user
-    </copy>
-    ```
+By being in the database, enqueues and dequeues can be incorporated in database transactions without requiring distributed transactions. And, messages can be queried using standard SQL. You can use SQL to access the message properties, the message history, and the payload. With SQL access, you can also audit and track messages. All available SQL technology, such as in-memory latches and table indices, optimize access to messages in TEQ.
 
-    Once the user is available, the Transactional Event Queue was created using PL/SQL script. Only upper case Topic/queue names are allowed for this preview release.
+![Oracle Transactional Event Queues (TEQ)](images/oracle-teq-picture.png " ")
 
-    ```sql
-    <copy>
-    BEGIN
-    sys.dbms_aqadm.create_sharded_queue(queue_name=>'LAB8022_TOPIC', multiple_consumers => TRUE);
-    sys.dbms_aqadm.start_queue('LAB8022_TOPIC');
-    END;
-    / 
-    </copy>
-    ```
+<https://docs.oracle.com/en/database/oracle/oracle-database/21/adque/aq-introduction.html#GUID-95868022-ECDA-4685-9D0A-52ED7663C84B>
+<https://developer.confluent.io/what-is-apache-kafka/>
 
-2. Once successfully executed, the subscriber agent was added:
-
-    To enable production for a Transactional Event Queue, it is required to register a subscriber agent. The bellow script creates this agent.
-
-    ```sql
-    <copy>
-    --- Create the subscriber agent
-    DECLARE
-    subscriber sys.aq$_agent;
-    BEGIN
-    subscriber := sys.aq$_agent('LAB8022_SUBSCRIBER', NULL, NULL);
-    DBMS_AQADM.ADD_SUBSCRIBER(queue_name => 'LAB8022_TOPIC', subscriber => subscriber);
-    END;
-    /
-    </copy>
-    ```
 
 ## **Task 1:** Verify configurations and build applications
 
@@ -329,4 +297,4 @@ You may now **proceed to the next lab**
 
 - **Authors** - Paulo Simoes, Developer Evangelist; Paul Parkinson, Developer Evangelist; Richard Exley, Consulting Member of Technical Staff, Oracle MAA and Exadata
 - **Contributors** - Mayank Tayal, Developer Evangelist; Sanjay Goil, VP Microservices and Oracle Database
-- **Last Updated By/Date** - Paulo Simoes, February 2022
+- **Last Updated By/Date** - Paulo Simoes, June 2022
