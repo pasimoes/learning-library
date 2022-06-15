@@ -88,7 +88,7 @@ Estimated Time: 10 minutes
     ```bash
     Created topic LABTEQTOPIC1
     Configuring Kafka Producer to produce on topic LABTEQTOPIC1.
-    Configuring Kafka Producer to consume from topic LABTEQTOPIC1.
+    Configuring Kafka Consumer to consume from topic LABTEQTOPIC1.
     ```
 
 ## **Task 2:** Build Kafka producer and consumer microservices
@@ -177,7 +177,7 @@ As a result of the Maven build task, you should obtain the following lines showi
 
     ```bash
     <copy>
-    kafka-dequeue
+    kafka-dequeue LABTEQTOPIC1
     </copy>
     ```
 
