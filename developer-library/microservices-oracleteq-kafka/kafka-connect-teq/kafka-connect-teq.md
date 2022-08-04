@@ -157,7 +157,7 @@ Now that you have the Connector running, you can produce some messages and test 
         }
     ```
 
-## **Task 3:** Dequeue messages from Oracle TEQ
+## **Task 3:** Dequeue messages from Oracle TEQ using PL/SQL
 
 After produce some messages, the expected behavior is the Connect Sync agent consume messages from Kafka Topic and enqueue them on Oracle TEQ. And, you will be able to dequeue them from Oracle TEQ using okafka consumer microservice or a PL/SQL procedure, for example.
 

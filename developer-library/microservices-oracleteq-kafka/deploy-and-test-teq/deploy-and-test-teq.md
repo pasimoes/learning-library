@@ -69,11 +69,10 @@ Configuring TEQ Consumer to consume from topic LABTEQTOPIC1.
 Likewise the previous Lab, we adopted the microservices architecture and coded the producer and consumer also using the Spring Boot framework but different now we have to connect with TEQ and exchanged from spring-kafka to okafka library. Also, Maven is the dependency management tool, and to build our code, you have to execute the following commands:
 
 ```bash
-<copy>cd $LAB_HOME/springboot-oracleteq</copy>
-```
-
-```bash
-<copy>./teq-ms-build</copy>
+<copy>
+cd $LAB_HOME/springboot-oracleteq
+./teq-ms-build
+</copy>
 ```
 
 As a result of the Maven build task, you should obtain the following lines showing that both Consumer and Producer were successfully built.
@@ -87,11 +86,10 @@ As a result of the Maven build task, you should obtain the following lines showi
     Now that we have the applications successfully built, we can deploy them and test them. Let's start with the Producer. Run these commands to build the image and deploy the Producer inside the Docker Engine:
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-oracleteq</copy>
-    ```
-
-    ```bash
-    <copy>./teq-ms-deploy-producer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-oracleteq
+    ./teq-ms-deploy-producer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages below:
@@ -110,11 +108,10 @@ As a result of the Maven build task, you should obtain the following lines showi
     Once you have deployed the producer microservice image, you will be able to launch a container and execute the producer microservice. Issue the follwoing commands:
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-oracleteq</copy>
-    ```
-
-    ```bash
-    <copy>./teq-ms-launch-producer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-oracleteq
+    ./teq-ms-launch-producer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages "TEQ producer microservice is running!". Yet it is possible to evaluate the logs from the producer issuing the following command to list the late six lines from the container log:
@@ -146,18 +143,6 @@ As a result of the Maven build task, you should obtain the following lines showi
     }
     ```
 
-    > **Note:** It is possible verify if the message was published inside TEQ Topic submiting the following command:
-
-    ```bash
-    <copy>
-    teq-dequeue LABTEQTOPIC1
-    </copy>
-    ```
-
-    <!-- You will need to press Crtl+C to stop this process. The result will be similar to :
-
-    ![Dequeuing TEQ Topic](images/kafka-dequeue.png " ") -->
-
 ## **Task 4:** Consume events with TEQ consumer microservice
 
 Now that we have Producer running and publishing events inside the TEQ Broker, you will do the same with Consumer.
@@ -167,11 +152,10 @@ Now that we have Producer running and publishing events inside the TEQ Broker, y
     We can deploy Consumer microservice running the following commands to build the image and deploy the it inside the Docker Engine:
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-oracleteq</copy>
-    ```
-
-    ```bash
-    <copy>./teq-ms-deploy-consumer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-oracleteq
+    ./teq-ms-deploy-consumer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages below:
@@ -190,40 +174,66 @@ Now that we have Producer running and publishing events inside the TEQ Broker, y
     Once you have deployed the consumer microservice image, you will be able to launch a container and execute it. Issue the follwoing commands:
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-oracleteq</copy>
-    ```
-
-    ```bash
-    <copy>./teq-ms-launch-consumer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-oracleteq
+    ./teq-ms-launch-consumer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages "TEQ consumer microservice is running!".
 
-    >> COLOCAR IMAGES AUQI
+    ```bash
+    Launching TEQ consumer microservice!
+
+    5e3ad25e39365606244ce5a4f91cce9ec4d0acd748245697176b0cc9d1b68525
+    Thu Aug  4 13:29:19 UTC 2022: Waiting for consumer running!
+
+    TEQ consumer microservice is running!
+    ```
 
 3. Test the TEQ consumer microservice
 
     The Consumer microservice after start try to dequeue the messages from the TEQ Broker. If it succeeds in dequeuing the events, we can see in the log the events that were sent by the producer issuing the following command to list the late six lines from the container log:
 
     ```bash
-    <copy>container-logs teq-consumer 6</copy>
+    <copy>container-logs teq-consumer 100</copy>
     ```
 
     The result inside logs of Consumer will be:
 
-    >> COLOCAR IMAGE AQUI ![Spring Boot TEQ Consumer Running Logs](images/springboot-teq-consumer-test.png " ")
+    ```bash
+    .   ____          ___ __
+    /\\ / __*'* __ _ *(*)_ ____ _\ \ \ \
+    ( ( )\___ | '_ | '*| | '* \/ _` | \ \ \ \
+    \\/  __*)| |*)| | | | | || (_| |  ) ) ) )
+    '  |____| .__|*| |*|_| |_\__, | / / / /
+    =========|_|==============|__*/=/*/_/_/
+    :: Spring Boot ::                (v2.6.6)
 
-    With this result, assuming a successful result, we could produce and consume events from TEQ Broker.
+    13:29:25.234 [main] INFO  c.o.d.o.o.OKafkaConsumerApplication - Starting OKafkaConsumerApplication v0.0.1-SNAPSHOT using Java 11.0.16 on 5e3ad25e3936 with PID 1 (/app/oracle-developers-okafka-consumer-0.0.1-SNAPSHOT.jar started by root in /app)
+    ......
+    13:29:31.185 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+    13:29:31.185 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5602 ms
+    Installing Oracle PKI provider.
+    13:29:32.199 [main] INFO  c.o.d.o.o.c.c.OKafkaConsumerConfig - OKafkaConsumerConfig::consumerConfig started and Oracle Instance is teqodb_tp.
+    ......
+    13:29:33.857 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8081 (http) with context path ''
+    13:29:34.236 [main] INFO  c.o.d.o.o.OKafkaConsumerApplication - Started OKafkaConsumerApplication in 11.775 seconds (JVM running for 14.391)
+    13:29:34.624 [main] INFO  o.o.o.c.consumer.ConsumerConfig - ConsumerConfig values:
+            auto.commit.interval.ms = 10000
+            auto.offset.reset = latest
+            ......
+            ......
+            tns.alias = teqodb_tp
+            value.deserializer = class org.oracle.okafka.common.serialization.StringDeserializer
 
-## **Task 4:** Stop Oracle TEQ Consumer
+    13:29:34.753 [main] WARN  o.o.o.common.utils.AppInfoParser - Error while loading kafka-version.properties :inStream parameter is null
+    13:29:34.754 [main] INFO  o.o.o.common.utils.AppInfoParser - Kafka version : unknown
+    13:29:34.755 [main] INFO  o.o.o.common.utils.AppInfoParser - Kafka commitId : unknown
+    13:29:45.448 [main] INFO  c.o.d.o.o.s.OKafkaConsumerService - message received {"id": "0", "message": "teq message1"}. using key 0. sending to processing: Thread id 1
+    ```
 
-As the following laboratory will require that messages produced in Oracle TEQ stay there, please stop the Oracle TEQ Consumer microservice.
-
-```bash
- <copy>
- docker stop okafka-consumer
- </copy>
-```
+    **With this result, assuming that processing was successful, we could produce and consume events from TEQ Broker.**
 
 ## **Extra 1:** Verify Microservices configurations (optional)
 

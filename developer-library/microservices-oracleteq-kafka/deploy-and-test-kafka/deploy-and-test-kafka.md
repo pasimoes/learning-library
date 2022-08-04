@@ -96,11 +96,10 @@ Estimated Time: 10 minutes
 This laboratory adopted the microservices architecture and coded the producer and consumer using the Spring Boot framework and Spring Kafka project to connect with Kafka. Maven is the dependency management tool, and to build our code, you have to execute the following commands:
 
 ```bash
-<copy>cd $LAB_HOME/springboot-kafka</copy>
-```
-
-```bash
-<copy>./kafka-ms-build</copy>
+<copy>
+cd $LAB_HOME/springboot-kafka
+./kafka-ms-build
+</copy>
 ```
 
 As a result of the Maven build task, you should obtain the following lines showing that both Consumer and Producer were successfully built.
@@ -114,11 +113,10 @@ As a result of the Maven build task, you should obtain the following lines showi
     Now that we have the applications successfully built, we can deploy them and test them. Let's start with the Producer. Run these commands to build the image and deploy the Producer inside the Docker Engine (the same running the Kafka Cluster):
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-kafka</copy>
-    ```
-
-    ```bash
-    <copy>./kafka-ms-deploy-producer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-kafka
+    ./kafka-ms-deploy-producer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages below:
@@ -137,11 +135,10 @@ As a result of the Maven build task, you should obtain the following lines showi
     Once you have deployed the producer microservice image, you will be able to launch a container and execute the producer microservice. Issue the follwoing commands:
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-kafka</copy>
-    ```
-
-    ```bash
-    <copy>./kafka-ms-launch-producer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-kafka
+    ./kafka-ms-launch-producer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages "Kafka producer microservice is running!". Yet it is possible to evaluate the logs from the producer issuing the following command to list the late six lines from the container log:
@@ -173,7 +170,7 @@ As a result of the Maven build task, you should obtain the following lines showi
     }
     ```
 
-    > **Note:** It is possible verify if the message was published inside Kafka Topic submiting the following command:
+    <!-- > **Note:** It is possible verify if the message was published inside Kafka Topic submiting the following command:
 
     ```bash
     <copy>
@@ -183,7 +180,7 @@ As a result of the Maven build task, you should obtain the following lines showi
 
     You will need to press Crtl+C to stop this process. The result will be similar to :
 
-    ![Dequeuing Kafka Topic](images/kafka-dequeue.png " ")
+    ![Dequeuing Kafka Topic](images/kafka-dequeue.png " ") -->
 
 ## **Task 4:** Consume events with Kafka consumer microservice
 
@@ -194,11 +191,10 @@ Now that we have Producer running and publishing events inside the Kafka Broker,
     We can deploy Consumer microservice running the following commands to build the image and deploy the it inside the Docker Engine (the same running the Kafka Cluster and Producer):
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-kafka</copy>
-    ```
-
-    ```bash
-    <copy>./kafka-ms-deploy-consumer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-kafka
+    ./kafka-ms-deploy-consumer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages below:
@@ -217,11 +213,10 @@ Now that we have Producer running and publishing events inside the Kafka Broker,
     Once you have deployed the consumer microservice image, you will be able to launch a container and execute it. Issue the follwoing commands:
 
     ```bash
-    <copy>cd $LAB_HOME/springboot-kafka</copy>
-    ```
-
-    ```bash
-    <copy>./kafka-ms-launch-consumer</copy>
+    <copy>
+    cd $LAB_HOME/springboot-kafka
+    ./kafka-ms-launch-consumer
+    </copy>
     ```
 
     If the deployment task is successful, you will receive the messages "Kafka consumer microservice is running!".
