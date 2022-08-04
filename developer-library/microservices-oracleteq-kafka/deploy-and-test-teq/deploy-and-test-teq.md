@@ -120,7 +120,7 @@ As a result of the Maven build task, you should obtain the following lines showi
     If the deployment task is successful, you will receive the messages "TEQ producer microservice is running!". Yet it is possible to evaluate the logs from the producer issuing the following command to list the late six lines from the container log:
 
     ```bash
-    <copy>ms-logs teq-producer 6</copy>
+    <copy>container-logs teq-producer 6</copy>
     ```
 
     ![Spring Boot TEQ Producer Running Logs](images/springboot-teq-producer-running.png " ")
@@ -206,7 +206,7 @@ Now that we have Producer running and publishing events inside the TEQ Broker, y
     The Consumer microservice after start try to dequeue the messages from the TEQ Broker. If it succeeds in dequeuing the events, we can see in the log the events that were sent by the producer issuing the following command to list the late six lines from the container log:
 
     ```bash
-    <copy>ms-logs teq-consumer 6</copy>
+    <copy>container-logs teq-consumer 6</copy>
     ```
 
     The result inside logs of Consumer will be:
