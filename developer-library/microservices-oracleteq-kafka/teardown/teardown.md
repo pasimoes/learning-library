@@ -39,14 +39,20 @@ Estimates Time: 10 minutes
     The following command help you check the object store deletion.
 
     ```bash
-    $ cat $LAB_LOG/objstore-destroy.log 
+    <copy>cat $LAB_LOG/objstore-destroy.log</copy>
+    ```
+
+    ```bash
     Deleting Object Store
     ```
 
     The following command show the terraform destroy command result.
 
     ```bash
-    $ cat $LAB_LOG/terraform-destroy.log 
+    <copy>cat $LAB_LOG/terraform-destroy.log</copy>
+    ```
+
+    ```bash
     Running terraform destroy
 
     Initializing the backend...
