@@ -8,7 +8,8 @@
       },
       {
         "title": "Get started",
-        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/cloud-login.md"      },
+        "filename": "https://oracle-livelabs.github.io/common/labs/cloud-login/event-register-free-tier-account.md"
+      },
       {
         "title": "Lab 1: Workshop setup",
         "filename": "../../setup/setup.md"
